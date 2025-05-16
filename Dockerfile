@@ -34,18 +34,8 @@ RUN avm use latest
 
 RUN solana-keygen new --no-bip39-passphrase
 
-# Install Node.js
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-# Fix: Use a single shell session to execute NVM commands
-RUN bash -c "source ~/.nvm/nvm.sh && \
-    nvm install 21.7.0 && \
-    nvm use 21.7.0 && \
-    npm install -g yarn"
-
 # Set working directory
 WORKDIR /usr/src/app
-
-RUN anchor init workspace
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
